@@ -176,7 +176,6 @@ async def vid(bot, update):
 	    
     # Some code that might raise an exception
     print("Attempting an operation...")
-except SomeException as e:
     # Handling the exception
     print(f"An error occurred: {e}")
           neg_used = used - int(file.file_size)
