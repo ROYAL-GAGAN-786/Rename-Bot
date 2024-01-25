@@ -173,6 +173,12 @@ async def vid(bot, update):
         used_limit(update.from_user.id, neg_used)
         await ms.edit(str(e))
         return
+	    
+    # Some code that might raise an exception
+    print("Attempting an operation...")
+except SomeException as e:
+    # Handling the exception
+    print(f"An error occurred: {e}")
           neg_used = used - int(file.file_size)
           used_limit(update.from_user.id,neg_used)
           await ms.edit(e)
