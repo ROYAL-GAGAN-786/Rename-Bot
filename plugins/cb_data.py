@@ -178,6 +178,9 @@ async def vid(bot, update):
     print("Attempting an operation...")
     # Handling the exception
     print(f"An error occurred: {e}")
+	# Corrected indentation
+          some_value = 10
+          result = some_value * 2  # Correct indentation
           neg_used = used - int(file.file_size)
           used_limit(update.from_user.id,neg_used)
           await ms.edit(e)
