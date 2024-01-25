@@ -132,55 +132,27 @@ async def doc(bot,update):
      			await ms.edit(e)
      			os.remove(file_path)
      			return
-			
+
 @Client.on_callback_query(filters.regex("vid"))
-async def vid(bot, update):
-    new_name = update.message.text
-    # Assuming find_one and used_limit are correctly defined and handle database operations
-    
-    used_info = find_one(update.from_user.id)
-    if used_info:
-        used = used_info["used_limit"]
-        date = used_info["date"]
-    else:
-        # Handle the case where user info is not found
-        # Optionally, provide feedback to the user or handle the situation accordingly
-        return
-
-    name = new_name.split(":-")
-    if len(name) < 2:
-        # Handle the case where the split result does not contain at least two elements
-        # Optionally, provide feedback to the user or handle the situation accordingly
-        return
-
-    new_filename = name[1]
-    file_path = f"downloads/{new_filename}"
-
-    message = update.message.reply_to_message
-    file = message.document or message.video or message.audio
-    ms = await update.message.edit("Trying To Download...")
-
-    # Assuming used_limit, download_media, and other related functions are correctly defined and handle their respective operations
-    used_limit(update.from_user.id, file.file_size)
-    c_time = time.time()
-    total_used = used + int(file.file_size)
-    used_limit(update.from_user.id, total_used)
-
-    try:
-        path = await bot.download_media(message=file, progress=progress_for_pyrogram, progress_args=("Trying To Download...", ms, c_time))
-    except Exception as e:
-        neg_used = used - int(file.file_size)
-        used_limit(update.from_user.id, neg_used)
-        await ms.edit(str(e))
-        return
-	    
-    # Some code that might raise an exception
-    print("Attempting an operation...")
-    # Handling the exception
-    print(f"An error occurred: {e}")
-	# Corrected indentation
-          some_value = 10
-          result = some_value * 2  # Correct indentation
+async def vid(bot,update):
+     new_name = update.message.text
+     used_ = find_one(update.from_user.id)
+     used = used_["used_limit"]
+     date = used_["date"]
+     name = new_name.split(":-")
+     new_filename = name[1]
+     file_path = f"downloads/{new_filename}"
+     message = update.message.reply_to_message
+     file = message.document or message.video or message.audio
+     ms = await update.message.edit("```Trying To Download...```")
+     used_limit(update.from_user.id,file.file_size)
+     c_time = time.time()
+     total_used = used + int(file.file_size)
+     used_limit(update.from_user.id,total_used)
+     try:
+     		path = await bot.download_media(message = file, progress=progress_for_pyrogram,progress_args=("``` Trying To Download...```",ms,c_time))
+     		
+     except Exception as e:
           neg_used = used - int(file.file_size)
           used_limit(update.from_user.id,neg_used)
           await ms.edit(e)
