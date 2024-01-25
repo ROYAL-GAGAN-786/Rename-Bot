@@ -31,6 +31,7 @@ async def cancel(bot,update):
 	except:
 		return
 		
+		
 @Client.on_callback_query(filters.regex('rename'))
 async def rename(bot,update):
 	date_fa = str(update.message.date)
@@ -39,9 +40,11 @@ async def rename(bot,update):
 	chat_id = update.message.chat.id
 	id = update.message.reply_to_message_id
 	await update.message.delete()
-	await update.message.reply_text(f"**𝙿𝚕𝚎𝚊𝚜𝚎  𝙴𝚗𝚝𝚎𝚛  𝚃𝚑𝚎  𝙽𝚎𝚠  𝙵𝚒𝚕𝚎𝚗𝚊𝚖𝚎...\n\n𝐍𝐨𝐭𝐞 - 𝙴𝚡𝚝𝚎𝚗𝚜𝚒𝚘𝚗  𝙽𝚘𝚝  𝚁𝚎𝚚𝚞𝚒𝚛𝚎𝚍.**",reply_to_message_id = id,
+	await update.message.reply_text(f"__Please enter the new filename...__\n\nNote:- Extension Not Required",reply_to_message_id = id,
 	reply_markup=ForceReply(True) )
 	dateupdate(chat_id,date)
+	
+	
 	
 @Client.on_callback_query(filters.regex("doc"))
 async def doc(bot,update):
@@ -60,7 +63,7 @@ async def doc(bot,update):
      total_used = used + int(file.file_size)
      used_limit(update.from_user.id,total_used)
      try:
-     		path = await bot.download_media(message = file, progress=progress_for_pyrogram,progress_args=("``` Trying To Download...```",ms,c_time))
+     		path = await bot.download_media(message = file, progress=progress_for_pyrogram,progress_args=( "``` Trying To Download...```",  ms, c_time   ))
      		
      except Exception as e:
           neg_used = used - int(file.file_size)
@@ -99,7 +102,7 @@ async def doc(bot,update):
      if value < file.file_size:
          await ms.edit("```Trying To Upload```")
          try:
-             filw = await app.send_document(log_channel,document = file_path,thumb=ph_path,caption = caption,progress=progress_for_pyrogram,progress_args=("```Trying To Uploading```",ms,c_time))
+             filw = await app.send_document(log_channel,document = file_path,thumb=ph_path,caption = caption,progress=progress_for_pyrogram,progress_args=( "```Trying To Uploading```",  ms, c_time   ))
              from_chat = filw.chat.id
              mg_id = filw.id
              time.sleep(2)
@@ -123,7 +126,7 @@ async def doc(bot,update):
      		await ms.edit("```Trying To Upload```")
      		c_time = time.time()
      		try:
-     			await bot.send_document(update.from_user.id,document = file_path,thumb=ph_path,caption = caption,progress=progress_for_pyrogram,progress_args=("```Trying To Uploading```",ms,c_time))			
+     			await bot.send_document(update.from_user.id,document = file_path,thumb=ph_path,caption = caption,progress=progress_for_pyrogram,progress_args=( "```Trying To Uploading```",  ms, c_time   ))			
      			await ms.delete()
      			os.remove(file_path)
      		except Exception as e:
@@ -131,8 +134,10 @@ async def doc(bot,update):
      			used_limit(update.from_user.id,neg_used)
      			await ms.edit(e)
      			os.remove(file_path)
-     			return
-
+     			return 
+     			     		   		
+   		
+     		     		     		
 @Client.on_callback_query(filters.regex("vid"))
 async def vid(bot,update):
      new_name = update.message.text
@@ -150,7 +155,7 @@ async def vid(bot,update):
      total_used = used + int(file.file_size)
      used_limit(update.from_user.id,total_used)
      try:
-     		path = await bot.download_media(message = file, progress=progress_for_pyrogram,progress_args=("``` Trying To Download...```",ms,c_time))
+     		path = await bot.download_media(message = file, progress=progress_for_pyrogram,progress_args=( "``` Trying To Download...```",  ms, c_time   ))
      		
      except Exception as e:
           neg_used = used - int(file.file_size)
@@ -199,7 +204,7 @@ async def vid(bot,update):
      if value < file.file_size:
          await ms.edit("```Trying To Upload```")
          try:
-             filw = await app.send_video(log_channel,video= file_path,thumb=ph_path,duration=duration ,caption = caption,progress=progress_for_pyrogram,progress_args=("```Trying To Uploading```",ms,c_time))
+             filw = await app.send_video(log_channel,video= file_path,thumb=ph_path,duration=duration ,caption = caption,progress=progress_for_pyrogram,progress_args=( "```Trying To Uploading```",  ms, c_time   ))
              from_chat = filw.chat.id
              mg_id = filw.id
              time.sleep(2)
@@ -223,7 +228,7 @@ async def vid(bot,update):
      		await ms.edit("```Trying To Upload```")
      		c_time = time.time()
      		try:
-     			await bot.send_video(update.from_user.id,video = file_path,thumb=ph_path,duration=duration,caption = caption,progress=progress_for_pyrogram,progress_args=("```Trying To Uploading```",ms,c_time))			
+     			await bot.send_video(update.from_user.id,video = file_path,thumb=ph_path,duration=duration,caption = caption,progress=progress_for_pyrogram,progress_args=( "```Trying To Uploading```",  ms, c_time   ))			
      			await ms.delete()
      			os.remove(file_path)
      		except Exception as e:
@@ -231,8 +236,11 @@ async def vid(bot,update):
      			used_limit(update.from_user.id,neg_used)
      			await ms.edit(e)
      			os.remove(file_path)
-     			return
-
+     			return 
+     
+   
+   
+     			     		     		
 @Client.on_callback_query(filters.regex("aud"))
 async def aud(bot,update):
      new_name = update.message.text
@@ -248,7 +256,7 @@ async def aud(bot,update):
      ms = await update.message.edit("```Trying To Download...```")
      c_time = time.time()
      try:
-     	path = await bot.download_media(message = file , progress=progress_for_pyrogram,progress_args=("``` Trying To Download...```",ms,c_time))
+     	path = await bot.download_media(message = file , progress=progress_for_pyrogram,progress_args=( "``` Trying To Download...```",  ms, c_time   ))
      except Exception as e:
      	neg_used = used - int(file.file_size)
      	used_limit(update.from_user.id,neg_used)
@@ -282,7 +290,7 @@ async def aud(bot,update):
      		await ms.edit("```Trying To Upload```")
      		c_time = time.time()
      		try:
-     			await bot.send_audio(update.message.chat.id,audio = file_path,caption = caption,thumb=ph_path,duration =duration, progress=progress_for_pyrogram,progress_args=("```Trying To Uploading```",ms,c_time))
+     			await bot.send_audio(update.message.chat.id,audio = file_path,caption = caption,thumb=ph_path,duration =duration, progress=progress_for_pyrogram,progress_args=( "```Trying To Uploading```",  ms, c_time   ))
      			await ms.delete()
      			os.remove(file_path)
      			os.remove(ph_path)
@@ -296,7 +304,7 @@ async def aud(bot,update):
      		await ms.edit("```Trying To Upload```")
      		c_time = time.time()
      		try:
-     			await bot.send_audio(update.message.chat.id,audio = file_path,caption = caption,duration = duration, progress=progress_for_pyrogram,progress_args=("```Trying To Uploading```",ms,c_time))
+     			await bot.send_audio(update.message.chat.id,audio = file_path,caption = caption,duration = duration, progress=progress_for_pyrogram,progress_args=( "```Trying To Uploading```",  ms, c_time   ))
      			await ms.delete()
      			os.remove(file_path)
      		except Exception as e:
