@@ -145,6 +145,7 @@ async def vid(bot,update):
      used = used_["used_limit"]
      date = used_["date"]
      name = new_name.split(":-")
+     len(name) >= 2:
      new_filename = name[1]
      file_path = f"downloads/{new_filename}"
      message = update.message.reply_to_message
