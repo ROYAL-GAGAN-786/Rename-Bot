@@ -150,7 +150,10 @@ if len(name) >= 2:
      file_path = f"downloads/{new_filename}"
      message = update.message.reply_to_message
      file = message.document or message.video or message.audio
-     ms = await update.message.edit("```Trying To Download...```")
+     async def edit_message_async(update):
+    # Assume update.message.edit is an asynchronous function
+    ms = await update.message.edit("Trying To Download...")
+    return ms
      used_limit(update.from_user.id,file.file_size)
      c_time = time.time()
      total_used = used + int(file.file_size)
