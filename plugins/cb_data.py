@@ -151,8 +151,8 @@ if len(name) >= 2:
      message = update.message.reply_to_message
      file = message.document or message.video or message.audio
      async def your_async_function_name(update):
-     ms = await update.message.edit("```Trying To Download...```")
-    return ms
+     await update.message.edit("```Trying To Download...```")
+    return
      result = await process_message(some_update)
      used_limit(update.from_user.id,file.file_size)
      c_time = time.time()
